@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components"
+import { connect } from 'react-redux';
+import { login } from '../action';
 
 
 const ContainerDiv = styled.div`
@@ -26,15 +28,16 @@ const ContainerDiv = styled.div`
 `
 
 const Login = props => {
-    const [login, setLogin] = useState({ userName: "", password: "" });
+    const [loginInfo, setLogininfo] = useState({ username: "", password: "" });
   
     const handleSubmit = event => {
       event.preventDefault();
-      setLogin({ userName: "", password: "" });
+      props.login(loginInfo)
+      setLogininfo({ username: "", password: "" });
     };
   
     const handleChange = event => {
-      setLogin({ ...login, [event.target.name]: event.target.value });
+      setLogininfo({ ...loginInfo, [event.target.name]: event.target.value });
       console.log(event.target.name, event.target.value);
     };
 
@@ -45,13 +48,13 @@ const Login = props => {
         <ContainerDiv>
 
           <label>
-            UserName:
+            username:
             <input
               required
               type="text"
-              name="userName"
-              placeholder="Username"
-              value={login.userName}
+              name="username"
+              placeholder="username"
+              value={loginInfo.username}
               onChange={handleChange}
               />
           </label>
@@ -63,13 +66,12 @@ const Login = props => {
               type="password"
               name="password"
               placeholder="password"
-              value={login.password}
+              value={loginInfo.password}
               onChange={handleChange}
               />
           </label>
   
-          <button>Log In</button>
-          <button>Clear</button>
+          <button type='submit'>Log In</button>
 
         </ContainerDiv>
         </form>
@@ -77,4 +79,7 @@ const Login = props => {
     );
   };
   
-export default Login;
+export default connect(null, { login })(Login)
+
+
+// export default Login;

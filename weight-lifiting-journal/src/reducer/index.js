@@ -39,6 +39,26 @@ const reducer = (state = initialState, action) => {
                 error: action.payload
             }
 
+        case USER_LOGING_IN: 
+            return{
+                ...state,
+                fetchingData: true
+            }
+        
+        case USER_LOGING_IN_SUCCESS:
+            return{
+                ...state,
+                fetchingData: false,
+                userData: action.payload
+            }
+        
+        case USER_LOGING_IN_FAILURE:
+            return{
+                ...state,
+                fetchingData: false,
+                error: action.payload
+            }
+
 
         default:
             return state
