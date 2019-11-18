@@ -69,7 +69,7 @@ const Login = props => {
           </label>
   
           <button>Log In</button>
-          <button>Clear</button>
+          <button onClick={handleSubmit}>Clear</button>
 
         </ContainerDiv>
         </form>
