@@ -11,9 +11,10 @@ export const login = loginData => dispatch => {
     dispatch( { type: USER_SIGNING } )
 
     axiosWithAuth()
-    .post(`/api/auth/login`, loginData)
+    .post(`/api/auth/registration`, loginData)
     .then(response =>  dispatch({ type: USER_SIGNING_SUCCESS, payload: response.data }
     ))
+    .then(history.push('/workout'))
     .catch(err => dispatch({ type: USER_SIGNING_FAILURE, payload: err.response }))
 }
 
@@ -29,6 +30,7 @@ export const SignUp = signUpData => dispatch => {
     .then( response => dispatch({ type: USER_LOGING_IN_SUCCESS, payload: response.data },
         localStorage.setItem('token', response.data.token)
     ))
+    .then(history.push('/workout'))
     .catch(err => dispatch({ type: USER_LOGING_IN_FAILURE, payload: err.response }))
 }
 export const START_FETCHING_DATA = 'START_FETCHING_DATA';
