@@ -6,6 +6,8 @@ import Nav from './components/Nav';
 import './App.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import PrivateRoute from './components/PrivateRoute';
+import WorkoutList from './components/WorkoutList';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/sign-up' component={SignUp} />
+
+        <PrivateRoute path='/workout' component={WorkoutList} />
 
       </div>
     </Router>
