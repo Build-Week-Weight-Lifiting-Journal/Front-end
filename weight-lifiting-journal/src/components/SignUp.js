@@ -7,7 +7,7 @@ const SignUp = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.SignUp(signup)
+    props.signUp(signup)
     setsignup({ userName: "", password: "", email: '' });
   };
 
@@ -21,7 +21,7 @@ const SignUp = props => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          UserName:
+          Username:
           <input
             required
             type="text"
@@ -33,7 +33,7 @@ const SignUp = props => {
         </label>
 
         <label>
-          UserName:
+          Email:
           <input
             required
             type="email"
