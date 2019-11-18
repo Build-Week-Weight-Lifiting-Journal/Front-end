@@ -28,12 +28,12 @@ const ContainerDiv = styled.div`
 `
 
 const Login = props => {
-    const [loginInfo, setLogininfo] = useState({ userName: "", password: "" });
+    const [loginInfo, setLogininfo] = useState({ username: "", password: "" });
   
     const handleSubmit = event => {
       event.preventDefault();
       props.login(loginInfo)
-      setLogininfo({ userName: "", password: "" });
+      setLogininfo({ username: "", password: "" });
     };
   
     const handleChange = event => {
@@ -48,13 +48,13 @@ const Login = props => {
         <ContainerDiv>
 
           <label>
-            UserName:
+            username:
             <input
               required
               type="text"
-              name="userName"
-              placeholder="Username"
-              value={loginInfo.userName}
+              name="username"
+              placeholder="username"
+              value={loginInfo.username}
               onChange={handleChange}
               />
           </label>

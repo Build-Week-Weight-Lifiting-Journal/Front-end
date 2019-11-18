@@ -11,8 +11,9 @@ export const login = loginData => dispatch => {
     dispatch( { type: USER_LOGING_IN } )
 
     axiosWithAuth()
-    .post(` https://weight-lift-journal.herokuapp.com/api/auth/login`, loginData)
-    .then(response =>  dispatch({ type: USER_LOGING_IN_SUCCESS, payload: response.data }
+    .post(`/api/auth/login`, loginData)
+    .then(response =>  dispatch({ type: USER_LOGING_IN_SUCCESS, payload: response },
+        localStorage.setItem('token', response.data.token)
     ))
     .then(history.push('/workout'))
     .catch(err => dispatch({ type: USER_LOGING_IN_FAILURE, payload: err.response }))
@@ -26,7 +27,7 @@ export const signUp = signUpData => dispatch => {
     dispatch( { type:USER_SIGNING } )
 
     axiosWithAuth()
-    .post(`https://weight-lift-journal.herokuapp.com/api/auth/registration`, signUpData)
+    .post(`/api/auth/register`, signUpData)
     .then( response => dispatch({ type: USER_SIGNING_SUCCESS, payload: response }
     ))
     .then(history.push('/login'))
