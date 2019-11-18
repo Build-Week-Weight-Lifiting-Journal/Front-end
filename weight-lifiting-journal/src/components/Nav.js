@@ -12,7 +12,10 @@ const Nav = (props) => {
     return(
         localStorage.getItem('token')
         ?
+        <div>
+            <NavLink to='/workout' >Work Out</NavLink>
             <NavLink  onClick={logOut} to='/'>logOut</NavLink>
+        </div>
         :
         <div>
             <NavLink to='/'>Home</NavLink>
