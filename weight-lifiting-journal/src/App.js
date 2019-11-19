@@ -22,8 +22,8 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/sign-up' component={SignUp} />
 
-        <PrivateRoute path='/workout' component={WorkoutList} />
-
+        {/* <PrivateRoute path='/workout' component={WorkoutList} /> */}
+        <Route  path='/workout' component={WorkoutList} />
 
       </div>
     </Router>
