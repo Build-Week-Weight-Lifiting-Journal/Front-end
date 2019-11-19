@@ -5,22 +5,46 @@ import { login } from '../action';
 
 
 const ContainerDiv = styled.div`
-        display:flex;
-        flex-direction:column;
-        justify-content:space-evenly;
-        width:35%;
-        
-        margin: 0 auto;
-
-      
+        border-radius: 35px;
+        border: 2px solid #43b2d6;
+        max-width: 800px;
+        margin: 4% auto;
+        box-shadow: 8px 10px 15px 7px black;
+        background-color: #1f1f11;
+        color: white;
 
             label{
-                justify-content:space-evenly;
-                padding:25px 0;
+              font-family: sans-serif;
+              font-size: 1.6rem;
+              margin: 0 0 0 0;
             }
+
+            input{
+              padding: 10px 0px 10px 20px;
+              font-family: sans-serif;
+              font-size: 1.2rem;
+              border: none;
+              border-radius: 18px;
+              outline: none;
+              margin: 20px 0;
+            }
+
             button{
-                width:15%;
-                margin: 1% auto;
+              color: white;
+              background-color: #6ad06a;
+              border-radius: 20px;
+              border: 1px solid lime;
+              font-size: 1.2rem;
+              font-family: sans-serif;
+              transition: 1s;
+              padding:13px 20px;
+              cursor: pointer;
+              margin: 20px 0;
+
+              :hover{
+                background-color: #3a9867;
+                color: black
+              }
                 
             }
 
@@ -43,39 +67,46 @@ const Login = props => {
 
     return (
       <div>
-        <h1>Log In</h1>
-        <form onSubmit={handleSubmit}>
         <ContainerDiv>
 
-          <label>
-            username:
-            <input
-              required
-              type="text"
-              name="username"
-              placeholder="username"
-              value={loginInfo.username}
-              onChange={handleChange}
-              />
-          </label>
-  
-          <label>
-            Password:
-            <input
-              required
-              type="password"
-              name="password"
-              placeholder="password"
-              value={loginInfo.password}
-              onChange={handleChange}
-              />
-          </label>
-  
+        <h1>Log In</h1>
+
+        <form onSubmit={handleSubmit}>
+
+          <label>Username</label>
+
+          <br/>
+
+          <input
+            required
+            type="text"
+            name="username"
+            placeholder="username"
+            value={loginInfo.username}
+            onChange={handleChange}
+            />
+
+          <br/>
+
+          <label>Password</label>
+
+          <br/>
+
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="password"
+            value={loginInfo.password}
+            onChange={handleChange}
+            />
+          
+          <br/>
 
           <button type='submit'>Log In</button>
 
-        </ContainerDiv>
         </form>
+        </ContainerDiv>
       </div>
     );
   };

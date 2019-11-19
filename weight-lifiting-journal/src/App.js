@@ -9,6 +9,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import WorkoutList from './components/WorkoutList';
+import CreateWorkoutForm from './components/CreateWorkoutForm';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 
         {/* <PrivateRoute path='/workout' component={WorkoutList} /> */}
         <Route  path='/workout' component={WorkoutList} />
-
+        <Route  path='/add-workout' component={CreateWorkoutForm}/>
       </div>
     </Router>
   );
