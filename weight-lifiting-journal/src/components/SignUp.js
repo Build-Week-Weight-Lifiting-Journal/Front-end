@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { signUp } from '../action';
 
 const SignUp = props => {
-  const [signup, setsignup] = useState({ userName: "", password: "", email: '' });
+  const [signup, setsignup] = useState({ username: "", password: "", email: '' });
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.SignUp(signup)
-    setsignup({ userName: "", password: "", email: '' });
+    props.signUp(signup)
+    setsignup({ username: "", password: "", email: '' });
   };
 
   const handleChange = event => {
@@ -21,19 +21,19 @@ const SignUp = props => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          UserName:
+          Username:
           <input
             required
             type="text"
-            name="userName"
+            name="username"
             placeholder="First Name"
-            value={signup.userName}
+            value={signup.username}
             onChange={handleChange}
           />
         </label>
 
         <label>
-          UserName:
+          Email:
           <input
             required
             type="email"
