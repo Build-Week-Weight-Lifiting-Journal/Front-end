@@ -72,9 +72,6 @@ const Login = props => {
           </label>
   
 
-          <button>Log In</button>
-          <button onClick={handleSubmit}>Clear</button>
-
           <button type='submit'>Log In</button>
 
         </ContainerDiv>
