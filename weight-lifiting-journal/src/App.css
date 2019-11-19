@@ -14,9 +14,35 @@
 .link.box.real{
   border: 2px #43b2d6 solid;
   border-radius: 20px;
+  transition: 1s ;
+}
+
+.link.box.real:hover{
+  border: 2px #43b2d6 solid;
+  border-radius: 20px;
+  color: black;
+  background-color: #43b2d6;
 }
 
 .dark-mode{
   background-color: #1f1f1f;
   color: white;
+}
+
+.link.box.add{
+  background-color: #7ae47a;
+  border-radius: 20px;
+  padding: 8px 14px;
+  transition: 1s ;
+}
+
+.link.box.add:hover{
+  background-color: darkcyan;
+  color: black;
+}
+
+.link.box.out:hover{
+  background-color: crimson;
+  border-radius: 20px;
+  transition: 1s;
 }
