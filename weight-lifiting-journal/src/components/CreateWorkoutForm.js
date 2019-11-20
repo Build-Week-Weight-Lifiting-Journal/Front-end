@@ -9,18 +9,6 @@ const CreateWorkoutForm = props => {
                     type='text'
                     placeholder='Workout Name'
                 />
-                <input
-                     type='text'
-                     placeholder='Times'
-                />
-                <input
-                     type='text'
-                     placeholder='Data'
-                />
-                <input
-                     type='text'
-                     placeholder='Body Region'
-                />
                 <br/>
                 <button type='submit'>Add</button>
             </form>

@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { connect } from 'react-redux';
 import { login } from '../action';
 
-
 const ContainerDiv = styled.div`
         border-radius: 35px;
         border: 2px solid #43b2d6;

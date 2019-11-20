@@ -7,15 +7,15 @@ export const USER_LOGING_IN = 'USER_LOGING_IN';
 export const USER_LOGING_IN_SUCCESS = 'USER_LOGING_IN_SUCCESS';
 export const USER_LOGING_IN_FAILURE = 'USER_LOGING_IN_FAILURE';
 
-export const login = loginData => dispatch => {
+export const login = (loginData) => dispatch => {
     dispatch( { type: USER_LOGING_IN } )
 
     axiosWithAuth()
     .post(`/api/auth/login`, loginData)
-    .then(response =>  dispatch({ type: USER_LOGING_IN_SUCCESS, payload: response },
-        localStorage.setItem('token', response.data.token)
+    .then(response =>  dispatch({ type: USER_LOGING_IN_SUCCESS, payload: response.data.user },
+        localStorage.setItem('token', response.data.token),
+        history.push('/workout')
     ))
-    .then(history.push('/workout'))
     .catch(err => dispatch({ type: USER_LOGING_IN_FAILURE, payload: err.response }))
 }
 
@@ -28,14 +28,26 @@ export const signUp = signUpData => dispatch => {
 
     axiosWithAuth()
     .post(`/api/auth/register`, signUpData)
-    .then( response => dispatch({ type: USER_SIGNING_SUCCESS, payload: response }
+    .then( response => dispatch({ type: USER_SIGNING_SUCCESS, payload: response.data.user},
+        localStorage.setItem('token', response.data.token),
+        // history.push('/login')
     ))
-    .then(history.push('/login'))
     .catch(err => dispatch({ type: USER_SIGNING_FAILURE, payload: err.response }))
 }
 export const START_FETCHING_DATA = 'START_FETCHING_DATA';
 export const FETCH_SUCCESS_DATA = 'FETCH_SUCCESS_DATA';
 export const FETCH_FAILURE_DATA = 'FETCH_FAILURE_DATA';
+
+export const fetchingUserData = () => dispatch => {
+    dispatch({type: START_FETCHING_DATA})
+
+    axiosWithAuth()
+    .get(`https://weight-lift-journal-dev.herokuapp.com/api/users/profile`)
+    .then(response => dispatch({ type: FETCH_SUCCESS_DATA, payload: response.data }))
+    .catch(err => dispatch({type: FETCH_FAILURE_DATA, payload: err.response}))
+}
+
+
 
 export const DELETING_DATA = 'DELETING_DATA';
 export const DELETING_DATA_SUCCESS = 'DELETING_DATA_SUCCESS';

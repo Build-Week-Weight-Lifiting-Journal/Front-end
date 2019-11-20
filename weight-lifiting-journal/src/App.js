@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
@@ -7,12 +7,22 @@ import Nav from "./components/Nav";
 import './App.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import PrivateRoute from './components/PrivateRoute';
+// import PrivateRoute from './components/PrivateRoute';
 import WorkoutList from './components/WorkoutList';
+import Workout from "./components/Workout";
 import CreateWorkoutForm from './components/CreateWorkoutForm';
-
+import axiosWithAuth from "./utils/axiosWithAuth";
 
 function App() {
+  const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth()
+    .get("https://weight-lift-journal-dev.herokuapp.com/api/workouts")
+    .then(res => setWorkouts(res.data))
+    .catch(err => console.log("Failed to get workouts", err));
+}, []);
+
   return (
     <Router>
       <div className="App">
@@ -24,8 +34,10 @@ function App() {
         <Route exact path='/sign-up' component={SignUp} />
 
         {/* <PrivateRoute path='/workout' component={WorkoutList} /> */}
-        <Route  path='/workout' component={WorkoutList} />
+        <Route  path='/workout-list' component={WorkoutList} />
         <Route  path='/add-workout' component={CreateWorkoutForm}/>
+        <Route exact path="/workout/:id" render={props => <Workout {...props} workouts={workouts} />} />
+
       </div>
     </Router>
   );
