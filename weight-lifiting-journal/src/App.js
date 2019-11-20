@@ -12,12 +12,24 @@ import WorkoutList from './components/WorkoutList';
 import Workout from "./components/Workout";
 import CreateWorkoutForm from './components/CreateWorkoutForm';
 import axiosWithAuth from "./utils/axiosWithAuth";
+import { get } from "http";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
     //----------------- Get request here for Workout exercise
+    axiosWithAuth()
+    .get('https://weight-lift-journal-dev.herokuapp.com/api/workouts')
+    .then(res=>{
+      setWorkouts(res.data)
+      
+    })
+    .catch(err=>{
+      console.log(err, "error")
+    })
+
+    
 }, []);
 
   return (
