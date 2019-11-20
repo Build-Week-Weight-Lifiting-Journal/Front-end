@@ -49,19 +49,12 @@ export const FETCH_SUCCESS_DATA = "FETCH_SUCCESS_DATA";
 export const FETCH_FAILURE_DATA = "FETCH_FAILURE_DATA";
 
 export const fetchingUserData = () => dispatch => {
-  dispatch({ type: START_FETCHING_DATA });
-
-  //-------- Get request here for Work out Card.
-  axiosWithAuth()
-    .get("https://weight-lift-journal-dev.herokuapp.com/api/users/profile")
-    .then(response => {
-      console.log(response.data);
-    })
-
-    .catch(error => {
-      console.error("Server Error", error);
-    });
-};
+    dispatch({type: START_FETCHING_DATA})
+    axiosWithAuth()
+    .get(`https://weight-lift-journal-dev.herokuapp.com/api/users/profile`)
+    .then(response => dispatch({ type: FETCH_SUCCESS_DATA, payload: response.data }))
+    .catch(err => dispatch({type: FETCH_FAILURE_DATA, payload: err.response}))
+}
 
 export const DELETING_DATA = "DELETING_DATA";
 export const DELETING_DATA_SUCCESS = "DELETING_DATA_SUCCESS";
@@ -70,3 +63,11 @@ export const DELETING_DATA_FAILURE = "DELETING_DATA_FAILURE";
 export const POSTING_DATA = "POSTING_DATA";
 export const POSTING_DATA_SUCCESS = "POSTING_DATA_SUCCESS";
 export const POSTING_DATA_FAILURE = "POSTING_DATA_FAILURE";
+
+export const addWorkout = (Id, data) => dispatch => {
+    dispatch({type: POSTING_DATA})
+    axiosWithAuth()
+        .post(`https://weight-lift-journal.herokuapp.com/api/users/${Id}/workouts`, data)
+        .then(response => dispatch({type: POSTING_DATA_SUCCESS, payload: response}))
+        .catch(err =>dispatch({type: POSTING_DATA_FAILURE, payload: err.response }))
+}
