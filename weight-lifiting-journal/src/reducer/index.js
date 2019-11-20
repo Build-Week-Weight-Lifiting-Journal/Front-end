@@ -5,18 +5,25 @@ import{
 
     USER_LOGING_IN,
     USER_LOGING_IN_SUCCESS,
-    USER_LOGING_IN_FAILURE
+    USER_LOGING_IN_FAILURE,
+
+    START_FETCHING_DATA,
+    FETCH_SUCCESS_DATA,
+    FETCH_FAILURE_DATA
 
 } from '../action'
 
 const initialState = {
-    userData: [],
+    userDataWorkout: [],
     fetchingData: false,
     error: '',
-    userData: {}
+    userData: {},
+    getUserData: {}
 }
 
 const reducer = (state = initialState, action) => {
+    // console.log('Data from reducer', state.userData)
+
     switch(action.type) {
 
         case USER_SIGNING:
@@ -49,10 +56,31 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 fetchingData: false,
-                userData: action.payload
+                userData: action.payload,
             }
         
         case USER_LOGING_IN_FAILURE:
+            return{
+                ...state,
+                fetchingData: false,
+                error: action.payload
+            }
+
+        case START_FETCHING_DATA:
+            return{
+                ...state,
+                fetchingData: true
+            }
+        
+        case FETCH_SUCCESS_DATA:
+            return{
+                ...state,
+                fetchingData: false,
+                getUserData: action.payload,
+                userData: action.payload
+            }
+        
+        case FETCH_FAILURE_DATA:
             return{
                 ...state,
                 fetchingData: false,
