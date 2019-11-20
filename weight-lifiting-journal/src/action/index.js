@@ -41,10 +41,8 @@ export const FETCH_FAILURE_DATA = 'FETCH_FAILURE_DATA';
 export const fetchingUserData = () => dispatch => {
     dispatch({type: START_FETCHING_DATA})
 
-    axiosWithAuth()
-    .get(`https://weight-lift-journal-dev.herokuapp.com/api/users/profile`)
-    .then(response => dispatch({ type: FETCH_SUCCESS_DATA, payload: response.data }))
-    .catch(err => dispatch({type: FETCH_FAILURE_DATA, payload: err.response}))
+    //-------- Get request here for Work out Card.
+
 }
 
 

@@ -17,10 +17,7 @@ function App() {
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
-    axiosWithAuth()
-    .get("https://weight-lift-journal-dev.herokuapp.com/api/workouts")
-    .then(res => setWorkouts(res.data))
-    .catch(err => console.log("Failed to get workouts", err));
+    //----------------- Get request here for Workout exercise
 }, []);
 
   return (
