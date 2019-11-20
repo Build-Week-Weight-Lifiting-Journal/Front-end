@@ -59,15 +59,15 @@ const Nav = (props) => {
                 </div>
 
                 <LinkDiv>
-                    <NavLink className='link box' to='/workout' >Work Out</NavLink>
+                    <NavLink className='link box' to='/workout-list' >Work Out List</NavLink>
                     <NavLink className='link box add' to='/add-workout'>+</NavLink>
                     <NavLink className='link box out' onClick={logOut} to='/'>logOut</NavLink>
             
                     {
                         DarkMode === true ?
-                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img'>🌞</span></Mode>)
+                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role="img" aria-label="sun">🌞</span></Mode>)
                         :
-                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img'>🌑</span></Mode>)   
+                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role="img" aria-label="moon">🌑</span></Mode>)   
                     }
                 </LinkDiv>
             </Center>
@@ -87,9 +87,9 @@ const Nav = (props) => {
                 
                     {
                         DarkMode === true ?
-                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img'>🌞</span></Mode>)
+                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img' aria-label="sun">🌞</span></Mode>)
                         :
-                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img'>🌑</span></Mode>)   
+                        (<Mode onClick={toggleDarkMode} className={DarkMode ? 'dark-button dark-mode' : 'dark-button' } ><span role='img' aria-label="moon">🌑</span></Mode>)   
                     }
                 </LinkDiv>
             </Center>

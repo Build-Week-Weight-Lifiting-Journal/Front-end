@@ -54,6 +54,7 @@ const SignUp = props => {
   const handleSubmit = event => {
     event.preventDefault();
     props.signUp(signup)
+    props.history.push('/login')
     setsignup({ username: "", password: "", email: '' });
   };
 
