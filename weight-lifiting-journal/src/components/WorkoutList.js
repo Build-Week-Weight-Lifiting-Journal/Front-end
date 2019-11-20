@@ -1,9 +1,9 @@
-import React,{useState,useEffect} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React,{useEffect} from 'react';
+import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
-import axiosWithAuth  from '../utils/axiosWithAuth'
+// import axiosWithAuth  from '../utils/axiosWithAuth'
 import { fetchingUserData } from '../action'
-import Workout from './Workout';
+// import Workout from './Workout';
 import styled from 'styled-components'
 
 const WorkoutList = props => {
@@ -46,7 +46,7 @@ const WorkoutList = props => {
         console.log('inside useEffect', props.userData)
     },[props.fetchingUserData, props.userData.username])
 
-    props.userData && console.log('outside of the useEffect', props.userData.username) || console.log('work')
+    // props.userData && console.log('outside of the useEffect', props.userData.username) || console.log('work')
 
     // if(props.userData.workouts){
     //     console.log('workout data', props.userData.workouts[])
@@ -57,7 +57,7 @@ const WorkoutList = props => {
                 <h1>Welcome {props.userData.username}</h1>
                 {
                 props.userData.workouts && props.userData.workouts.map(work => (
-                    <WorkoutListButton onClick={() => props.history.push(`/workout/${work.id}`)}>{work.workout_name}</WorkoutListButton>    
+                    <WorkoutListButton key={props.userData.workouts.id} onClick={() => props.history.push(`/workout/${work.id}`)}>{work.workout_name}</WorkoutListButton>    
                 ))
                 }
             </div>
@@ -71,6 +71,6 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchingUserData })(WorkoutList)
+export default connect(mapStateToProps, { fetchingUserData })(withRouter(WorkoutList))
 
 // export default WorkoutList
