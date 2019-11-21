@@ -105,8 +105,8 @@ export const addExercise = (id, data) => dispatch => {
 
     axiosWithAuth()
     .post(`/api/workouts/${id}/exercises`, data)
-    .then(response => dispatch({type: POSTING_DATA_SUCCESS, payload: response}))
-    .catch(err => dispatch({type: POSTING_DATA_FAILURE, payload: err.response}))
+    .then(response => dispatch({type: POST_EXERCISE_SUCCESS, payload: response}))
+    .catch(err => dispatch({type: POST_EXERCISE_FAILURE, payload: err.response}))
 }
 
 export const DELETING_EXERCISE = 'DELETING_EXERCISE';
@@ -119,5 +119,5 @@ export const deleteExercise = (id) => dispatch => {
   axiosWithAuth()
   .delete(`/api/workouts/exercises/${id}`)
   .then(response => dispatch({type: DELETING_EXERCISE_SUCCESS, payload: response}))
-  .catch(err => dispatch({type: DELETING_DATA_FAILURE, payload: err.response}))
+  .catch(err => dispatch({type: DELETING_EXERCISE_FAILURE, payload: err.response}))
 }
