@@ -64,7 +64,7 @@ const WorkoutList = props => {
                 <h1>Welcome {props.userData.username}</h1>
                 {
                 props.userData.workouts && props.userData.workouts.map(work => (
-                    <WorkoutListButton key={props.userData.workouts.id} onClick={() => props.history.push(`/workout/${work.id}`)}>{work.workout_name}</WorkoutListButton>    
+                    <WorkoutListButton key={props.userData.workouts.id} onClick={() => props.history.push(`/workout/${work.id}`)}>{work.name}</WorkoutListButton>    
                 ))
                 }
                 <PeaceImgStyle src={PeaceImg} />

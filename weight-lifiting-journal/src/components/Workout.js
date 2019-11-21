@@ -68,8 +68,8 @@ const Workouts = props => {
     const [newExercise, setNewExercise] = useState({
         name: '',
         region: '',
-        reps: '',
-        sets: ''
+        reps: 0,
+        sets: 0
     })
 
     const [newName, setNewname] = useState({
@@ -114,24 +114,25 @@ const Workouts = props => {
             ...newName,
             [e.target.name]: e.target.value
         })
-        console.log([e.target.name], e.target.value)
+        console.log(e.target.name, e.target.value)
         // console.log(props.match.params.id, "workout ID", workout.id)
     }
 
     const handleSubmitExercise = e => {
         e.preventDefault()
         props.addExercise(props.match.params.id, newExercise)
-        setEditExercise(!editExercise);
         props.history.push('/workout-list')
+        setEditExercise(!editExercise);
         setNewExercise({
             name: '',
             region: '',
-            reps: '',
-            sets: ''
+            reps: 0,
+            sets: 0
         })
     }
 
     //----------------------------
+
 
     return(
         <Center>
@@ -167,28 +168,36 @@ const Workouts = props => {
                         onChange={handleExercise}
                         value={newExercise.name}
                         name='name'
+                        required
                     />
+                    <br/>
                      <input
                         type='text'
                         placeholder='Region'
                         onChange={handleExercise}
                         value={newExercise.region}
                         name='region'
+                        required
                     />
+                    <br/>
                      <input
-                        type='text'
+                        type='number'
                         placeholder='Reps'
                         onChange={handleExercise}
                         value={newExercise.reps}
                         name='reps'
+                        required
                     />
+                    <br/>
                      <input
-                        type='text'
+                        type='number'
                         placeholder='Sets'
                         onChange={handleExercise}
                         value={newExercise.sets}
                         name='sets'
+                        required
                     />
+                    <br/>
                     <button type='submit'>ADD</button>
                 </form>
             }

@@ -3,6 +3,7 @@ import Fitness1 from "../Images/Fitness1.jpg"
 import Fitness2 from "../Images/Fitness2.jpg"
 import Fitness3 from "../Images/Fitness3.jpg"
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 const SidePanel = styled.div`
     background-color: black;
@@ -19,23 +20,7 @@ const Container = styled.div`
         }
 
 `
-const Button = styled.button`
-color: white;
-background-color: #6ad06a;
-border-radius: 20px;
-border: 1px solid lime;
-font-size: 1.2rem;
-font-family: sans-serif;
-transition: 1s;
-padding:13px 20px;
-cursor: pointer;
-margin: 40px 45px;
 
-:hover{
-  background-color: #3a9867;
-  color: black
-}
-`
 const ImgDiv = styled.div`
     height:90%;
     width:80%;
@@ -65,10 +50,10 @@ const Home = () => {
                 <img src = {Fitness1} alt = "deadlift"/>
                 <img src = {Fitness2} alt = "deadlift"/>
                 <img src = {Fitness3} alt = "deadlift"/>
-        <section>
-            <Button>Log In</Button>
-            <Button>About</Button>
-            <Button>Sign Up</Button>
+        <section className='buttons'>
+
+            <NavLink className='home-link' to='/login'>Log In</NavLink>
+            <NavLink className='home-link' to='/sign-up'>Sing Up</NavLink>
         </section>
             </ImgDiv>
         </div> 

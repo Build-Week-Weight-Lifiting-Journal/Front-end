@@ -53,3 +53,25 @@
   border: none;
   border-radius: 20px
 }
+
+.home-link{
+  color: white;
+  background-color: #6ad06a;
+  border-radius: 20px;
+  border: 1px solid lime;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  transition: 1s;
+  padding:13px 20px;
+  cursor: pointer;
+  margin: 40px 45px;
+}
+
+.home-link:hover{
+  background-color: #3a9867;
+  color: black
+}
+
+.buttons{
+  margin: 3% 0;
+}
