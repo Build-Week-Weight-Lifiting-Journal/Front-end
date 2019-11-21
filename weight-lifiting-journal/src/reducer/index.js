@@ -21,7 +21,15 @@ import{
 
     EDIT_DATA_START,
     EDIT_DATA_SUCCESS,
-    EDIT_DATA_FAILURE
+    EDIT_DATA_FAILURE,
+
+    POST_EXERCISE,
+    POST_EXERCISE_SUCCESS,
+    POST_EXERCISE_FAILURE,
+
+    DELETING_EXERCISE,
+    DELETING_EXERCISE_SUCCESS,
+    DELETING_EXERCISE_FAILURE
 
 } from '../action'
 
@@ -158,8 +166,48 @@ const reducer = (state = initialState, action) => {
                 fetchingData: false,
                 error: action.payload
             }
-            
+
+        case POST_EXERCISE:
+            return{
+                ...state,
+                fetchingData: true
+            }
+
+        case POST_EXERCISE_SUCCESS:
+            return{
+                ...state,
+                fetchingData: false,
+                userData: action.payload
+            }
+
+        case POST_EXERCISE_FAILURE:
+            return{
+                ...state,
+                fetchingData: false,
+                error: action.payload
+            }
+
+        case DELETING_EXERCISE:
+            return{
+                ...state,
+                fetchingData: true
+            }
         
+        case DELETING_EXERCISE_SUCCESS:{
+            return{
+                ...state,
+                fetchingData: false,
+                userData: action.payload
+            }
+        }
+        
+        case DELETING_EXERCISE_FAILURE:
+            return{
+                ...state,
+                fetchingData: false,
+                error: action.payload
+            }
+
         default:
             return state
     }
