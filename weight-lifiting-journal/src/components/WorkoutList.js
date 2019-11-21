@@ -5,6 +5,21 @@ import { connect } from 'react-redux'
 import { fetchingUserData } from '../action'
 // import Workout from './Workout';
 import styled from 'styled-components'
+import PeaceImg from '../image/undraw_mindfulness_scgo.svg'
+
+const PeaceImgStyle = styled.img`
+    max-width: 100%;
+    width: 40%;
+    margin: 0 auto;
+`
+
+const Center = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+
+`
 
 const WorkoutList = props => {
 
@@ -26,21 +41,6 @@ const WorkoutList = props => {
         }
     `
 
-    // const [userData, setUserData] = useState({});
-
-    // useEffect(()=> {
-
-    //     axiosWithAuth()
-    //     .get(`https://weight-lift-journal-dev.herokuapp.com/api/users/profile`)
-    //     .then(async res => {
-    //         await setUserData(res)
-    //         // console.log('this from useEffect from workoutlist', res)
-    //     })
-    //     .catch(err => console.log('workoutList err', err))
-    // },[])
-    
-    // console.log(userData.data,'from workoutlist axioswithauth')
-
     useEffect(()=>{
         props.fetchingUserData()
         console.log('inside useEffect', props.userData)
@@ -52,15 +52,23 @@ const WorkoutList = props => {
     //     console.log('workout data', props.userData.workouts[])
     // }
 
+
+    if(!props.userData.workouts){
+        console.log('You need to add work out')
+    }else{
+        console.log('here is your work')
+    }
+
     return(
-            <div>
+            <Center>
                 <h1>Welcome {props.userData.username}</h1>
                 {
                 props.userData.workouts && props.userData.workouts.map(work => (
-                    <WorkoutListButton key={props.userData.workouts.id} onClick={() => props.history.push(`/workout/${work.id}`)}>{work.workout_name}</WorkoutListButton>    
+                    <WorkoutListButton key={props.userData.workouts.id} onClick={() => props.history.push(`/workout/${work.id}`)}>{work.name}</WorkoutListButton>    
                 ))
                 }
-            </div>
+                <PeaceImgStyle src={PeaceImg} />
+            </Center>
     )
 }
 

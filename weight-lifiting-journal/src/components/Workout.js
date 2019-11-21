@@ -4,7 +4,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { connect } from 'react-redux'
 
-import { deleteWorkout, editWorkout } from '../action'
+import { deleteWorkout, editWorkout, deleteExercise,addExercise } from '../action'
 
 import styled from 'styled-components'
 
@@ -23,6 +23,39 @@ const CardHolder = styled.div`
     border-radius: 20px;
 `
 
+const Delete = styled.button`
+    background-color: #e6474e;
+    color: white;
+`
+const Edit = styled.button`
+    background-color: #207eea;
+    color: white;
+`
+const Add = styled.button`
+    background-color: #2ab72a;
+    color: white;
+`
+
+const Input = styled.input`
+    margin: 55px 1px 15px 4px;
+    padding: 15px 2px;
+    color: black;
+    border: none;
+    font-size: 1.4rem;
+    border-bottom: 4px black solid;
+    outline: none;
+    border-radius: 16px
+`
+
+const Submit = styled.button`
+    color: white;
+    background-color: green;
+    padding: 17px 20px;
+    border-radius: 10px
+    margin: 0 9px;
+    border: none;
+`
+
 const Workouts = props => {
 
 
@@ -30,6 +63,14 @@ const Workouts = props => {
 
     const [workout, setWorkout] = useState({})
     const [isEditing, setIsEditing] = useState(false);
+    const [editExercise, setEditExercise] = useState(false);
+
+    const [newExercise, setNewExercise] = useState({
+        name: '',
+        region: '',
+        reps: 0,
+        sets: 0
+    })
 
     const [newName, setNewname] = useState({
         name: ''
@@ -45,13 +86,15 @@ const Workouts = props => {
         .catch(err => console.log(err))
     },[])
 
+    
+
     const handleChange = e => {
         setNewname({
             ...newName,
             [e.target.name]: e.target.value
         })
 
-        console.log(props.match.params.id, "workout ID", workout.id)
+        // console.log(props.match.params.id, "workout ID", workout.id)
     }
 
     const handleSubmit = e => {
@@ -64,6 +107,33 @@ const Workouts = props => {
         })
     }
 
+    //----------------------------------ADD NEW Exercise
+
+    const handleExercise = e => {
+        setNewExercise({
+            ...newName,
+            [e.target.name]: e.target.value
+        })
+        console.log(e.target.name, e.target.value)
+        // console.log(props.match.params.id, "workout ID", workout.id)
+    }
+
+    const handleSubmitExercise = e => {
+        e.preventDefault()
+        props.addExercise(props.match.params.id, newExercise)
+        props.history.push('/workout-list')
+        setEditExercise(!editExercise);
+        setNewExercise({
+            name: '',
+            region: '',
+            reps: 0,
+            sets: 0
+        })
+    }
+
+    //----------------------------
+
+
     return(
         <Center>
             {
@@ -71,22 +141,66 @@ const Workouts = props => {
                     ? <h1>{workout.workout_name}</h1>
                     : 
                     <form onSubmit={handleSubmit}>
-                        <input
+                        <Input
                             type='text'
                             placeholder='New WorkOut Name'
                             onChange={handleChange}
                             value={newName.name}
                             name='name'
                         />
-                        <br/>
-                        <button type='submit'>Submit</button>
+                        
+                        <Submit type='submit'>Submit</Submit>
                     </form>
             }
-            <button onClick={() => setIsEditing(true)}> Edit Workout Name </button>
-            <button> Add Exercise </button>
-            <button onClick={() => props.deleteWorkout(props.match.params.id)}> Delete Workout </button>
+            <div>
+            <Edit className='mulit-button' onClick={() => setIsEditing(true)}> Edit Workout Name </Edit>
+            <Delete className='mulit-button' onClick={() => props.deleteWorkout(props.match.params.id)}> Delete Workout </Delete>
+            </div>
+            <Add className='mulit-button' onClick={() => setEditExercise(true)}> Add Exercise </Add>
 
-            <h2>Exercises</h2>
+            {
+                !editExercise
+                ?<h2>Exercises</h2>
+                :<form onSubmit={handleSubmitExercise}>
+                    <input
+                        type='text'
+                        placeholder='New Exercise'
+                        onChange={handleExercise}
+                        value={newExercise.name}
+                        name='name'
+                        required
+                    />
+                    <br/>
+                     <input
+                        type='text'
+                        placeholder='Region'
+                        onChange={handleExercise}
+                        value={newExercise.region}
+                        name='region'
+                        required
+                    />
+                    <br/>
+                     <input
+                        type='number'
+                        placeholder='Reps'
+                        onChange={handleExercise}
+                        value={newExercise.reps}
+                        name='reps'
+                        required
+                    />
+                    <br/>
+                     <input
+                        type='number'
+                        placeholder='Sets'
+                        onChange={handleExercise}
+                        value={newExercise.sets}
+                        name='sets'
+                        required
+                    />
+                    <br/>
+                    <button type='submit'>ADD</button>
+                </form>
+            }
             {
                 workout.exercises && workout.exercises.map(exercise => (
                 <CardHolder key={workout.exercises.exercise_id}>
@@ -94,6 +208,7 @@ const Workouts = props => {
                     <p>Region: {exercise.region}</p>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
+                    <button onClick={() => props.deleteWorkout(exercise.exercise_id)}>Delete</button>
                 </CardHolder>
                 ))
             }
@@ -102,6 +217,6 @@ const Workouts = props => {
     )
 }
 
-export default connect( null, { deleteWorkout, editWorkout } )(Workouts)
+export default connect( null, { deleteWorkout, editWorkout, deleteExercise, addExercise } )(Workouts)
 
 // export default Workouts
