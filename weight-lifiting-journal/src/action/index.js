@@ -78,7 +78,7 @@ export const addWorkout = (Id, data) => dispatch => {
     dispatch({type: POSTING_DATA})
     axiosWithAuth()
         .post(`/api/users/${Id}/workouts`, data)
-        .then(response => console.log('You have added a new Workout', response))
+        .then(response => dispatch({type: POSTING_DATA_SUCCESS, payload: response}))
         .catch(err => dispatch({type: POSTING_DATA_FAILURE, payload: err.response }))
 }
 

@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { editWorkout } from '../action'
+import { withRouter } from 'react-router-dom'
 
 const EditWorkout = props => {
 
@@ -20,6 +21,7 @@ const EditWorkout = props => {
     const handleSubmit = e => {
         e.preventDefault()
         props.editWorkout(newName, props.match.params.id)
+        props.history.push('/workout-list')
         setNewname({
             name: ''
         })
@@ -44,6 +46,6 @@ const EditWorkout = props => {
     )
 }
 
-export default connect(null, { editWorkout})(EditWorkout)
+export default connect(null, { editWorkout})(withRouter(EditWorkout))
 
 // export default EditWorkout;
