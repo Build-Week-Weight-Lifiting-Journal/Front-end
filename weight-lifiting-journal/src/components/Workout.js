@@ -23,6 +23,39 @@ const CardHolder = styled.div`
     border-radius: 20px;
 `
 
+const Delete = styled.button`
+    background-color: #e6474e;
+    color: white;
+`
+const Edit = styled.button`
+    background-color: #207eea;
+    color: white;
+`
+const Add = styled.button`
+    background-color: #2ab72a;
+    color: white;
+`
+
+const Input = styled.input`
+    margin: 55px 1px 15px 4px;
+    padding: 15px 2px;
+    color: black;
+    border: none;
+    font-size: 1.4rem;
+    border-bottom: 4px black solid;
+    outline: none;
+    border-radius: 16px
+`
+
+const Submit = styled.button`
+    color: white;
+    background-color: green;
+    padding: 17px 20px;
+    border-radius: 10px
+    margin: 0 9px;
+    border: none;
+`
+
 const Workouts = props => {
 
 
@@ -71,20 +104,22 @@ const Workouts = props => {
                     ? <h1>{workout.workout_name}</h1>
                     : 
                     <form onSubmit={handleSubmit}>
-                        <input
+                        <Input
                             type='text'
                             placeholder='New WorkOut Name'
                             onChange={handleChange}
                             value={newName.name}
                             name='name'
                         />
-                        <br/>
-                        <button type='submit'>Submit</button>
+                        
+                        <Submit type='submit'>Submit</Submit>
                     </form>
             }
-            <button onClick={() => setIsEditing(true)}> Edit Workout Name </button>
-            <button> Add Exercise </button>
-            <button onClick={() => props.deleteWorkout(props.match.params.id)}> Delete Workout </button>
+            <div>
+            <Edit className='mulit-button' onClick={() => setIsEditing(true)}> Edit Workout Name </Edit>
+            <Delete className='mulit-button' onClick={() => props.deleteWorkout(props.match.params.id)}> Delete Workout </Delete>
+            </div>
+            <Add className='mulit-button'> Add Exercise </Add>
 
             <h2>Exercises</h2>
             {
