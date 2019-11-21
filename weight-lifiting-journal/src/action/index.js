@@ -95,3 +95,29 @@ export const editWorkout = (data, id) => dispatch =>{
     .then(response => dispatch({type: EDIT_DATA_SUCCESS, payload: response}))
     .catch(err => dispatch({type: EDIT_DATA_FAILURE, payload: err.response}))
 }
+
+export const POST_EXERCISE = 'POST_EXERCISE';
+export const POST_EXERCISE_SUCCESS = 'POST_EXERCISE_SUCCESS';
+export const POST_EXERCISE_FAILURE = 'POST_EXERCISE_FAILURE';
+
+export const addExercise = (id) => dispatch => {
+    dispatch({type: POSTING_DATA})
+
+    axiosWithAuth()
+    .post(`/api/workouts/${id}/exercises`)
+    .then(response => dispatch({type: POSTING_DATA_SUCCESS, payload: response}))
+    .catch(err => dispatch({type: POSTING_DATA_FAILURE, payload: err.response}))
+}
+
+export const DELETING_EXERCISE = 'DELETING_EXERCISE';
+export const DELETING_EXERCISE_SUCCESS = 'DELETING_EXERCISE_SUCCESS';
+export const DELETING_EXERCISE_FAILURE = 'DELETING_EXERCISE_FAILURE';
+
+export const deleteExercise = (id) => dispatch => {
+  dispatch({type: DELETING_EXERCISE})
+
+  axiosWithAuth()
+  .delete(`/api/workouts/exercises/${id}`)
+  .then(response => dispatch({type: DELETING_EXERCISE_SUCCESS, payload: response}))
+  .catch(err => dispatch({type: DELETING_DATA_FAILURE, payload: err.response}))
+}

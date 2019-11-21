@@ -4,7 +4,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { connect } from 'react-redux'
 
-import { deleteWorkout, editWorkout } from '../action'
+import { deleteWorkout, editWorkout, deleteExercise } from '../action'
 
 import styled from 'styled-components'
 
@@ -129,6 +129,7 @@ const Workouts = props => {
                     <p>Region: {exercise.region}</p>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
+                    <button onClick={() => props.deleteWorkout(exercise.exercise_id)}>Delete</button>
                 </CardHolder>
                 ))
             }
@@ -137,6 +138,6 @@ const Workouts = props => {
     )
 }
 
-export default connect( null, { deleteWorkout, editWorkout } )(Workouts)
+export default connect( null, { deleteWorkout, editWorkout, deleteExercise } )(Workouts)
 
 // export default Workouts
