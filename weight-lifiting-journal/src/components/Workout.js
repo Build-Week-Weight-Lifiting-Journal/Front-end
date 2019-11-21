@@ -4,7 +4,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { connect } from 'react-redux'
 
-import { deleteWorkout, editWorkout, deleteExercise } from '../action'
+import { deleteWorkout, editWorkout, deleteExercise,addExercise } from '../action'
 
 import styled from 'styled-components'
 
@@ -63,6 +63,14 @@ const Workouts = props => {
 
     const [workout, setWorkout] = useState({})
     const [isEditing, setIsEditing] = useState(false);
+    const [editExercise, setEditExercise] = useState(false);
+
+    const [newExercise, setNewExercise] = useState({
+        name: '',
+        region: '',
+        reps: '',
+        sets: ''
+    })
 
     const [newName, setNewname] = useState({
         name: ''
@@ -78,13 +86,15 @@ const Workouts = props => {
         .catch(err => console.log(err))
     },[])
 
+    
+
     const handleChange = e => {
         setNewname({
             ...newName,
             [e.target.name]: e.target.value
         })
 
-        console.log(props.match.params.id, "workout ID", workout.id)
+        // console.log(props.match.params.id, "workout ID", workout.id)
     }
 
     const handleSubmit = e => {
@@ -96,6 +106,32 @@ const Workouts = props => {
             name: ''
         })
     }
+
+    //----------------------------------ADD NEW Exercise
+
+    const handleExercise = e => {
+        setNewExercise({
+            ...newName,
+            [e.target.name]: e.target.value
+        })
+        console.log([e.target.name], e.target.value)
+        // console.log(props.match.params.id, "workout ID", workout.id)
+    }
+
+    const handleSubmitExercise = e => {
+        e.preventDefault()
+        props.addExercise(props.match.params.id, newExercise)
+        setEditExercise(!editExercise);
+        props.history.push('/workout-list')
+        setNewExercise({
+            name: '',
+            region: '',
+            reps: '',
+            sets: ''
+        })
+    }
+
+    //----------------------------
 
     return(
         <Center>
@@ -119,9 +155,43 @@ const Workouts = props => {
             <Edit className='mulit-button' onClick={() => setIsEditing(true)}> Edit Workout Name </Edit>
             <Delete className='mulit-button' onClick={() => props.deleteWorkout(props.match.params.id)}> Delete Workout </Delete>
             </div>
-            <Add className='mulit-button'> Add Exercise </Add>
+            <Add className='mulit-button' onClick={() => setEditExercise(true)}> Add Exercise </Add>
 
-            <h2>Exercises</h2>
+            {
+                !editExercise
+                ?<h2>Exercises</h2>
+                :<form onSubmit={handleSubmitExercise}>
+                    <input
+                        type='text'
+                        placeholder='New Exercise'
+                        onChange={handleExercise}
+                        value={newExercise.name}
+                        name='name'
+                    />
+                     <input
+                        type='text'
+                        placeholder='Region'
+                        onChange={handleExercise}
+                        value={newExercise.region}
+                        name='region'
+                    />
+                     <input
+                        type='text'
+                        placeholder='Reps'
+                        onChange={handleExercise}
+                        value={newExercise.reps}
+                        name='reps'
+                    />
+                     <input
+                        type='text'
+                        placeholder='Sets'
+                        onChange={handleExercise}
+                        value={newExercise.sets}
+                        name='sets'
+                    />
+                    <button type='submit'>ADD</button>
+                </form>
+            }
             {
                 workout.exercises && workout.exercises.map(exercise => (
                 <CardHolder key={workout.exercises.exercise_id}>
@@ -138,6 +208,6 @@ const Workouts = props => {
     )
 }
 
-export default connect( null, { deleteWorkout, editWorkout, deleteExercise } )(Workouts)
+export default connect( null, { deleteWorkout, editWorkout, deleteExercise, addExercise } )(Workouts)
 
 // export default Workouts

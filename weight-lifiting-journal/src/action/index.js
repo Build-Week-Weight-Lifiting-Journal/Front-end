@@ -100,11 +100,11 @@ export const POST_EXERCISE = 'POST_EXERCISE';
 export const POST_EXERCISE_SUCCESS = 'POST_EXERCISE_SUCCESS';
 export const POST_EXERCISE_FAILURE = 'POST_EXERCISE_FAILURE';
 
-export const addExercise = (id) => dispatch => {
+export const addExercise = (id, data) => dispatch => {
     dispatch({type: POSTING_DATA})
 
     axiosWithAuth()
-    .post(`/api/workouts/${id}/exercises`)
+    .post(`/api/workouts/${id}/exercises`, data)
     .then(response => dispatch({type: POSTING_DATA_SUCCESS, payload: response}))
     .catch(err => dispatch({type: POSTING_DATA_FAILURE, payload: err.response}))
 }
