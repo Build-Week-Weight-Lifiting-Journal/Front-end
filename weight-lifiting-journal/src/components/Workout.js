@@ -122,7 +122,7 @@ const Workouts = props => {
     const handleSubmitExercise = e => {
         e.preventDefault()
         props.addExercise(props.match.params.id, newExercise)
-        props.history.push('/workout-list')
+        // props.history.push('/workout-list')
         setEditExercise(!editExercise);
         setNewExercise({
             name: '',
@@ -210,7 +210,7 @@ const Workouts = props => {
                     <p>Region: {exercise.region}</p>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
-                    <button onClick={() => props.deleteWorkout(exercise.user_exercise_id)}>Delete</button>
+                    <button onClick={() => props.deleteExercise(exercise.user_exercise_id)}>Delete</button>
                 </CardHolder>
                 ))
             }
