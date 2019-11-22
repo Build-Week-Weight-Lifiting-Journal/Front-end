@@ -82,6 +82,7 @@ const Workouts = props => {
         .then(res => {
             // setExercises(res.data.exercises)
             setWorkout(res.data)
+            console.log(workout)
         })
         .catch(err => console.log(err))
     },[])
@@ -111,7 +112,7 @@ const Workouts = props => {
 
     const handleExercise = e => {
         setNewExercise({
-            ...newName,
+            ...newExercise,
             [e.target.name]: e.target.value
         })
         console.log(e.target.name, e.target.value)
@@ -133,6 +134,7 @@ const Workouts = props => {
 
     //----------------------------
 
+    console.log('Exercise Exercise Exercise Exercise', workout.exercises);
 
     return(
         <Center>
@@ -208,7 +210,7 @@ const Workouts = props => {
                     <p>Region: {exercise.region}</p>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
-                    <button onClick={() => props.deleteWorkout(exercise.exercise_id)}>Delete</button>
+                    <button onClick={() => props.deleteWorkout(exercise.user_exercise_id)}>Delete</button>
                 </CardHolder>
                 ))
             }
