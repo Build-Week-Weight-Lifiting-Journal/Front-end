@@ -47,6 +47,17 @@ const Input = styled.input`
     border-radius: 16px
 `
 
+const InputExercise = styled.input`
+    margin: 0px 1px 15px 4px;
+    padding: 6px 2px;
+    color: black;
+    border: none;
+    font-size: 1rem;
+    border-bottom: 4px black solid;
+    outline: none;
+    border-radius: 16px
+`
+
 const Submit = styled.button`
     color: white;
     background-color: green;
@@ -68,8 +79,8 @@ const Workouts = props => {
     const [newExercise, setNewExercise] = useState({
         name: '',
         region: '',
-        reps: 0,
-        sets: 0
+        reps: '',
+        sets: ''
     })
 
     const [newName, setNewname] = useState({
@@ -127,8 +138,8 @@ const Workouts = props => {
         setNewExercise({
             name: '',
             region: '',
-            reps: 0,
-            sets: 0
+            reps: '',
+            sets: ''
         })
     }
 
@@ -164,7 +175,7 @@ const Workouts = props => {
                 !editExercise
                 ?<h2>Exercises</h2>
                 :<form onSubmit={handleSubmitExercise}>
-                    <input
+                    <InputExercise
                         type='text'
                         placeholder='New Exercise'
                         onChange={handleExercise}
@@ -173,7 +184,7 @@ const Workouts = props => {
                         required
                     />
                     <br/>
-                     <input
+                     <InputExercise
                         type='text'
                         placeholder='Region'
                         onChange={handleExercise}
@@ -182,7 +193,7 @@ const Workouts = props => {
                         required
                     />
                     <br/>
-                     <input
+                     <InputExercise
                         type='number'
                         placeholder='Reps'
                         onChange={handleExercise}
@@ -191,7 +202,7 @@ const Workouts = props => {
                         required
                     />
                     <br/>
-                     <input
+                     <InputExercise
                         type='number'
                         placeholder='Sets'
                         onChange={handleExercise}
@@ -200,7 +211,7 @@ const Workouts = props => {
                         required
                     />
                     <br/>
-                    <button type='submit'>ADD</button>
+                    <Submit className='mulit-button' type='submit'>ADD</Submit>
                 </form>
             }
             {
@@ -210,7 +221,7 @@ const Workouts = props => {
                     <p>Region: {exercise.region}</p>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
-                    <button onClick={() => props.deleteExercise(exercise.user_exercise_id)}>Delete</button>
+                    <Delete className='mulit-button' onClick={() => props.deleteExercise(exercise.user_exercise_id)}>Delete</Delete>
                 </CardHolder>
                 ))
             }
